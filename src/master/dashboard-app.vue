@@ -7,7 +7,7 @@
           <div class="h-[50px] bg-gray-900 flex items-center">
             <div class="font-bold text-xl px-[20px]">Rumah Sakit Cemara</div>
           </div>
-          <div class="bg-gray-800 h-[calc(100%-50px)] px-[20px] py-[20px]">
+          <div class="flex flex-col justify-between h-[calc(100vh-3rem)] bg-gray-800">
             <div class="flex flex-col justify-between h-full">
               <div class="flex flex-col space-y-[10px]">
                 <router-link to="/home" class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
@@ -99,7 +99,7 @@
           </div>
         </div>
         <div class="bg-gray-50  h-[calc(100%-50px)] p-[20px]">
-          <div class="border rounded-md h-full p-[20px]">
+          <div class="border rounded-md h-full p-[20px] overflow-auto">
             <router-view></router-view>
           </div>
         </div>
