@@ -12,7 +12,7 @@ const routes = [
   {
     name: 'dashboard-app',
     component: dashboardApp,
-    path: '/home',
+    path: '/',
     children: [
       {
         name: "home",
