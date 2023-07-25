@@ -3,70 +3,39 @@
     <h3 class="text-2xl font-bold text-left py-2">Tambah Data Pasien</h3>
     <div v-if="!showSuccess" class="max-w-xs mx-auto">
       <form>
-        <!-- Form fields -->
-        <!-- <div class="mb-4"> -->
-          <!-- <label class="block text-gray-700 text-sm font-bold mb-2" for="no_rm">No Rekam Medis:</label> -->
-          <!-- <input  -->
-            <!-- type="text" -->
-            <!-- id="no_rm" -->
-            <!-- v-model="form.no_rm" -->
-            <!-- class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" -->
-            <!-- required -->
-          <!-- />  -->
-          <!-- <p v-if="form.no_rm === ''" class="text-red-500 text-xs italic">No Rekam Medis harus diisi</p> -->
-        <!-- </div> -->
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama:</label>
-          <input 
-            type="text"
-            id="nama"
-            v-model="form.nama"
+          <input type="text" id="nama" v-model="form.nama"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
+            required />
           <p v-if="form.nama === ''" class="text-red-500 text-xs italic">Nama harus diisi</p>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="tempat_lahir">Tempat Lahir:</label>
-          <input
-            type="text"
-            id="tempat_lahir"
-            v-model="form.tempat_lahir"
+          <input type="text" id="tempat_lahir" v-model="form.tempat_lahir"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
+            required />
           <p v-if="form.tempat_lahir === ''" class="text-red-500 text-xs italic">Tempat Lahir harus diisi</p>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal_lahir">Tanggal Lahir:</label>
-          <input
-            type="date"
-            id="tanggal_lahir"
-            v-model="form.tanggal_lahir"
+          <input type="date" id="tanggal_lahir" v-model="form.tanggal_lahir"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
+            required />
           <p v-if="form.tanggal_lahir === ''" class="text-red-500 text-xs italic">Tanggal Lahir harus diisi</p>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="alamat">Alamat:</label>
-          <textarea
-            id="alamat"
-            v-model="form.alamat"
+          <textarea id="alamat" v-model="form.alamat"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            rows="3"
-            required
-          ></textarea>
+            rows="3" required></textarea>
           <p v-if="form.alamat === ''" class="text-red-500 text-xs italic">Alamat harus diisi</p>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="golongan_darah">Golongan Darah:</label>
-          <select
-            id="golongan_darah"
-            v-model="form.golongan_darah"
+          <select id="golongan_darah" v-model="form.golongan_darah"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          >
+            required>
             <option value="" disabled>Pilih Golongan Darah</option>
             <option value="A">A</option>
             <option value="B">B</option>
@@ -78,9 +47,7 @@
         <div class="flex justify-end">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            @click="submitForm"
-          >
+            type="button" @click="submitForm">
             Simpan
           </button>
         </div>
@@ -93,8 +60,6 @@
         </div>
       </div>
       <table class="user-table">
-        <!-- Table rows -->
-        <!-- ... (table code) ... -->
       </table>
     </div>
   </div>
@@ -141,9 +106,14 @@ export default {
         alamat: this.form.alamat,
         gol_darah: this.form.golongan_darah
       };
-
-      axios
-        .post('http://localhost:6001/users', datas)
+      const token = localStorage.getItem("token")
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios //dapat berkomunikasi dengan API
+        .post('https://distinct-gold-caridea.cyclic.app/api/pasien', datas, config) //menyimpan
         .then(() => {
           this.showSuccess = true;
           this.fetchUsers();
@@ -157,8 +127,14 @@ export default {
         });
     },
     fetchUsers() {
+      const token = localStorage.getItem("token")
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       axios
-        .get('http://localhost:6001/users')
+        .get('https://distinct-gold-caridea.cyclic.app/api/pasien',config)
         .then(response => {
           this.users = response.data;
         })

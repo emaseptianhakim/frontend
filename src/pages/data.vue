@@ -15,8 +15,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.NO_RM">
-            <td>{{ user.NO_RM }}</td>
+          <tr v-for="user in users" :key="user._id">
+            <td>{{ user._id }}</td>
             <td>{{ user.nama }}</td>
             <td>{{ user.tempat_lahir }}</td>
             <td>{{ formatDate(user.tgl_lahir) }}</td>
@@ -33,11 +33,11 @@
     <!-- Form Pop-up -->
     <div v-if="selectedUser" class="form-popup">
       <div class="form-container">
-        <h2>Edit User</h2>
+        <h2>Edit Data Pasien</h2>
         <form @submit.prevent="saveUser">
           <div>
             <label for="NO_RM">NO Rekam Medis</label>
-            <input type="text" v-model="selectedUser.NO_RM" disabled>
+            <input type="text" v-model="selectedUser._id" disabled>
           </div>
           <div>
             <label for="nama">Nama</label>
@@ -57,12 +57,12 @@
           </div>
           <div>
             <label for="gol_darah">Golongan Darah</label>
-          <select v-model="selectedUser.gol_darah">
-          <option value="">Pilih Golongan Darah</option>
-          <option value="A">A</option>
-          <option value="AB">AB</option>
-          <option value="O">O</option>
-          </select>
+            <select v-model="selectedUser.gol_darah">
+              <option value="">Pilih Golongan Darah</option>
+              <option value="A">A</option>
+              <option value="AB">AB</option>
+              <option value="O">O</option>
+            </select>
           </div>
           <div>
             <button type="submit" class="save-button">Simpan</button>
@@ -91,7 +91,7 @@ export default {
   methods: {
     fetchUsers() {
       axios
-        .get('http://localhost:6001/users')
+        .get('https://distinct-gold-caridea.cyclic.app/api/pasien') //mengambil
         .then((response) => {
           this.users = response.data;
         })
@@ -109,9 +109,14 @@ export default {
       // Ubah format tanggal sebelum mengirimkan permintaan PUT
       const formattedDate = moment(this.selectedUser.tgl_lahir).format('YYYY-MM-DD');
       this.selectedUser.tgl_lahir = formattedDate;
-
-      axios
-        .put(`http://localhost:6001/users/${this.selectedUser.NO_RM}`, this.selectedUser)
+      const token = localStorage.getItem("token");
+      const config1 = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios 
+        .put(`https://distinct-gold-caridea.cyclic.app/api/pasien/${this.selectedUser._id}`, this.selectedUser, config1) //mengedit
         .then(() => {
           this.selectedUser = null; // Menghapus data pengguna yang sedang diedit
           this.fetchUsers(); // Mengambil ulang data pengguna dari server
@@ -124,9 +129,15 @@ export default {
       this.selectedUser = null;
     },
     deleteUser(user) {
+      const token = localStorage.getItem("token");
+      const config1 = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       if (confirm('Apakah anda yakin akan menghapus data ini?')) {
         axios
-          .delete(`http://localhost:6001/users/${user.NO_RM}`)
+          .delete(`https://distinct-gold-caridea.cyclic.app/api/pasien/${user._id}`,config1)
           .then(() => {
             this.fetchUsers();
           })

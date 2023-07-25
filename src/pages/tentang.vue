@@ -8,7 +8,7 @@
           <img class="w-40 h-40 rounded-full mr-4" src="../assets/foto.jpg" alt="Foto Profil">
           <div >
             <p class="text-gray-700 font-bold text-lg">Profil Saya</p>
-            <p class="text-gray-600">Nama: Min Yoongi</p>
+            <p class="text-gray-600">Nama: Users</p>
             <p class="text-gray-600">Umur: 31 Tahun</p>
             <p class="text-gray-600">Alamat: Jl. Daegu, Korea Selatan</p>
           </div>

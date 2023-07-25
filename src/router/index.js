@@ -4,8 +4,9 @@ import home from '../pages/home'
 import table from '../pages/table'
 import data from '../pages/data'
 import tentang from '../pages/tentang'
-import login from '../pages/login'
 import peraturan from '../pages/peraturan'
+import signup from '../pages/signup'
+
 
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
     name: 'dashboard-app',
     component: dashboardApp,
     path: '/',
+    redirect:'/home',
     children: [
       {
         name: "home",
@@ -42,9 +44,9 @@ const routes = [
     ]
   },
   {
-    name: "login",
-    component: login,
-    path: "/login",
+    name: "signup",
+    component: signup,
+    path: "/signup",
   },
 ];
 

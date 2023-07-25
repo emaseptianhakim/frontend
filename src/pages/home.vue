@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="text-2xl font-bold text-center py-2">Hai Min Yoongi</h3>
+    <h3 class="text-2xl font-bold text-center py-2">Hai</h3>
     <h4 class="text-lg font-semibold text-center py-2">Selamat datang di website Rumah Sakit Cemara.</h4>
     <h4 class="text-lg font-semibold text-center py-2">Di sini, Anda dapat menambahkan data pasien rekam medis yang Anda miliki.</h4>
     <h4 class="text-lg font-bold text-center py-2">Pengelolaan Rekam Medis oleh Dokter di Rumah Sakit Cemara</h4>
@@ -38,6 +38,10 @@ export default {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  /* background-image: url('../assets/hospital.jpg'); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h3 {
@@ -72,4 +76,12 @@ p {
 .items-center {
   align-items: center;
 }
+
+/* Contoh pengaturan background-image */
+/* .container { */
+  /* background-image: url('../assets/hospital.jpg'); */
+  /* background-position: center; */
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+/* } */
 </style>
